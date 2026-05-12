@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const nunjucks = require("nunjucks");
 const nedb = require("@seald-io/nedb");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const database = new nedb({ filename: "data.db", autoload: true });
@@ -18,36 +19,64 @@ nunjucks.configure("views", {
   express: app,
 });
 
+app.use(cookieParser());
+
 // routes
 app.get("/", (req, res) => {
-  res.render("index.njk")
+  //if there's a cookie, don't make another one, if there isn't, make one
+  if(req.cookies.visits){
+    console.log(req.cookies.visits)
+    let visits = req.cookies.visits
+    visits++
+    res.cookie("visits", visits, {
+      //cookie lasts for 10 hours
+      expires: new Date(Date.now() + 1000 * 600 * 60)
+    })
+    res.redirect("/map")
+  } else {
+        //3 params:
+        //1. name of cookie stored
+        //2. init val you want to assign
+        //3rd: when the cookie expires, in obj format
+        let oneHrInMs = 1000 * 600 * 60
+        res.cookie("visits", 1, {
+            expires: new Date(Date.now() + oneHrInMs)
+        })
+        res.render("index.njk")
+    }
+
 })
+
 app.get("/form", (req, res) => {
   res.render("form.njk")
 })
 
 app.post("/sign", upload.single("img"), (req, res) => {
-  let options = req.body.options
+  let categories = req.body.categories
 
-  if(!options){
-    options = []
-  } else if (!Array.isArray(options)){
-    options = [options];
+  if(!categories){
+    categories = []
+  } else if (!Array.isArray(categories)){
+    categories = [categories
+    ];
   }
 
   let newData = {
-    filePath: "'uploads/" + req.file.filename,
+    filePath: "uploads/" + req.file.filename,
     imgDesc: req.body.description,
-    options: options,
-
+    categories: categories
   }
 
+  console.log(newData)
   database.insert(newData)
   res.redirect("/map")
 
 })
+
 app.get("/map", (req, res) => {
   res.render("map.njk")
+
+
 })
 
 // port listening

@@ -20,6 +20,7 @@
   "homepage": "https://github.com/ReahKy23/Interlinked#readme",
   "dependencies": {
     "@seald-io/nedb": "^4.1.2",
+    "cookie-parser": "^1.4.7",
     "express": "^5.2.1",
     "multer": "^2.1.1",
     "nunjucks": "^3.2.4"
