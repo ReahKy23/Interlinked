@@ -1,1 +1,12 @@
-this is the form page, if we chose to give it a separate page
+{% extends "baseLayout.njk" %}
+
+<body>
+    <form method="POST" action="/sign" enctype="multipart/form-data">
+        <input type="file" name="img">
+        <input type="checkbox" name = "categories" value="category1">
+        <input type="checkbox" name = "categories" value="category2">
+        <input type="checkbox" name = "categories" value="category3">
+        <input type="text" placeholder="enter a description for your photo" name="description">
+        <input type="submit" value="post">
+    </form>
+</body>

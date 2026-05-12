@@ -19,17 +19,38 @@ nunjucks.configure("views", {
 });
 
 // routes
-app.get("/", (req, res) =>{
-  res.render("index.njk")  
+app.get("/", (req, res) => {
+  res.render("index.njk")
 })
-app.get("/form", (req, res) =>{
-    res.render("form.njk")  
-  })
-app.get("/map", (req, res) =>{
-    res.render("map.njk")  
-  })
+app.get("/form", (req, res) => {
+  res.render("form.njk")
+})
+
+app.post("/sign", upload.single("img"), (req, res) => {
+  let options = req.body.options
+
+  if(!options){
+    options = []
+  } else if (!Array.isArray(options)){
+    options = [options];
+  }
+
+  let newData = {
+    filePath: "'uploads/" + req.file.filename,
+    imgDesc: req.body.description,
+    options: options,
+
+  }
+
+  database.insert(newData)
+  res.redirect("/map")
+
+})
+app.get("/map", (req, res) => {
+  res.render("map.njk")
+})
 
 // port listening
-app.listen(7001, ()=>{
-    console.log("server is running on port http://localhost:7001")
+app.listen(7001, () => {
+  console.log("server is running on port http://localhost:7001")
 })
