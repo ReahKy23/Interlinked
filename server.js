@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
       //cookie lasts for 10 hours
       expires: new Date(Date.now() + 1000 * 600 * 60)
     })
-    res.redirect("/map")
+    //res.redirect("/map")
   } else {
         //3 params:
         //1. name of cookie stored
@@ -42,9 +42,8 @@ app.get("/", (req, res) => {
         res.cookie("visits", 1, {
             expires: new Date(Date.now() + oneHrInMs)
         })
-        res.render("index.njk")
     }
-
+    res.render("index.njk")
 })
 
 app.get("/form", (req, res) => {
