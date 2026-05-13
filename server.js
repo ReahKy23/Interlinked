@@ -25,6 +25,7 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   //if there's a cookie, don't make another one, if there isn't, make one
   if(req.cookies.visits){
+    let visits = req.cookies.visits
     console.log(req.cookies.visits)
     res.cookie("visits", visits, {
       //cookie lasts for 10 hours
