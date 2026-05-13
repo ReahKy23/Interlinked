@@ -26,8 +26,6 @@ app.get("/", (req, res) => {
   //if there's a cookie, don't make another one, if there isn't, make one
   if(req.cookies.visits){
     console.log(req.cookies.visits)
-    let visits = req.cookies.visits
-    visits++
     res.cookie("visits", visits, {
       //cookie lasts for 10 hours
       expires: new Date(Date.now() + 1000 * 600 * 60)
