@@ -75,7 +75,13 @@ app.post("/sign", upload.single("img"), (req, res) => {
 app.get("/map", (req, res) => {
   res.render("map.njk")
 
+})
 
+app.get("/data", (req,res) => {
+  let query = {}
+  database.find(query, (err, foundData) => {
+    res.json({newData: foundData})
+  })
 })
 
 // port listening
