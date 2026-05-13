@@ -1,9 +1,18 @@
 //Link to documentation currently using: https://docs.anychart.com/Basic_Charts/Network_Graph
-let data = {
-    nodes: [await fetch("/data").then(response => response.json())],
-    edges: []
-}
+let jsonResponse = await fetch ("/data")
+let myNodes = []
+let myEdges = []
 
+for(let individualSubmission of jsonResponse){
+    myNodes.push({id: individualSubmission._id})
+
+    
+    myEdges.push({from:  , to: })
+}
+let data = {
+    nodes: [myNodes],
+    edges: [myEdges]
+}
 
 let chart = anychart.graph(data)
 

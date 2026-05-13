@@ -58,6 +58,8 @@ app.post("/sign", upload.single("image"), (req, res) => {
     categories: [req.body.firstChoice, req.body.secondChoice]
   }
 
+  database.count({categories: [''] }, (err, count){
+  })
   console.log(newData)
   database.insert(newData)
   res.redirect("/map")
