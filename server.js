@@ -48,20 +48,13 @@ app.get("/form", (req, res) => {
   res.render("form.njk")
 })
 
-app.post("/sign", upload.single("img"), (req, res) => {
-  let categories = req.body.categories
-
-  if(!categories){
-    categories = []
-  } else if (!Array.isArray(categories)){
-    categories = [categories
-    ];
-  }
+app.post("/sign", upload.single("image"), (req, res) => {
 
   let newData = {
     filePath: "uploads/" + req.file.filename,
+    name: req.body.userName,
     imgDesc: req.body.description,
-    categories: categories
+    categories: [req.body.firstChoice, req.body.secondChoice]
   }
 
   console.log(newData)

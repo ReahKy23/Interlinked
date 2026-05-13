@@ -1,17 +1,52 @@
-{% extends "baseLayout.njk" %}
-
-{% block content %}
+{% extends "baseLayout.njk" %} {% block content %}
 
 <body>
-    <form method="POST" action="/sign" enctype="multipart/form-data">
-        <input type="file" name="img">
-        <input type="checkbox" name = "categories" value="category1"> Category 1
-        <input type="checkbox" name = "categories" value="category2"> Category 2
-        <input type="checkbox" name = "categories" value="category3"> Category 3
-        <textarea placeholder="enter a description for your photo" name="description"
-        rows = "6" cols="30"></textarea>
-        <input type="submit" value="post">
+  <h1>Upload your meeting below:</h1>
+  <div id="uploadForm">
+    <form action="/sign" method="POST" enctype="multipart/form-data">
+      <label>enter your name:</label>
+      <input type="text" name="userName" />
+
+      <label>upload you image</label>
+      <input type="file" name="image" />
+      {# add requirement #}
+      <fieldset>
+        <legend>Select first category</legend>
+        <label
+          ><input type="radio" name="firstChoice" value="sadness" required />
+          sadness</label
+        >
+        <label><input type="radio" name="firstChoice" value="joy" /> Joy</label>
+        <label
+          ><input type="radio" name="firstChoice" value="fear" /> Fear</label
+        >
+        <label
+          ><input type="radio" name="firstChoice" value="content" />
+          Content</label
+        >
+      </fieldset>
+
+      <fieldset>
+        <legend>Select secondary category (optional)</legend>
+        <label
+          ><input type="radio" name="secondChoice" value="sadness" required />
+          sadness</label
+        >
+        <label
+          ><input type="radio" name="secondChoice" value="joy" /> Joy</label
+        >
+        <label
+          ><input type="radio" name="secondChoice" value="fear" /> Fear</label
+        >
+        <label
+          ><input type="radio" name="secondChoice" value="content" />
+          Content</label
+        >
+      </fieldset>
+
+      <input type="submit" />
     </form>
+  </div>
 </body>
 
 {% endblock %}
