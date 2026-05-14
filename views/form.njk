@@ -1,4 +1,8 @@
 {% extends "baseLayout.njk" %}
+{% block styles %}
+<link rel="stylesheet" href="../css/space.css" />
+{% endblock %}
+
 {% block content %}
 
 <div class="nav">
@@ -11,36 +15,50 @@
 </div>
 
 <section id="formModal">
-  <h1>Upload your meeting below:</h1>
-  <div id="uploadForm">
+  <h1 id="formHeader">Upload your meeting below:</h1>
     <form action="/sign" method="POST" enctype="multipart/form-data">
-      <label>enter your name:</label>
-      <input type="text" name="userName" />
+      <div>
+        <label>What is your name?</label>
+        <input type="text" name="userName" required class="textbox" placeholder="enter name" />
+      </div>
 
-      <label>upload you image</label>
-      <input type="file" name="image" />
+  
+      <div>
+        <label for="file-upload" class="custom-file-button">
+          Upload your image
+        </label>
+
+        <!-- The actual hidden input -->
+        <input name="image" id="file-upload" type="file" required/>
+      </div>
+
       {# add requirement #}
       <fieldset>
-        <legend>Select first category</legend>
+        <legend>What best explains your image</legend>
         <label><input type="radio" name="firstChoice" value="sadness" required />
           sadness</label>
-        <label><input type="radio" name="firstChoice" value="joy" /> Joy</label>
-        <label><input type="radio" name="firstChoice" value="fear" /> Fear</label>
+        <label><input type="radio" name="firstChoice" value="joy" /> joy</label>
+        <label><input type="radio" name="firstChoice" value="fear" /> fear</label>
         <label><input type="radio" name="firstChoice" value="content" />
-          Content</label>
+          content</label>
       </fieldset>
 
       <fieldset>
-        <legend>Select second category</legend>
-        <label><input type="radio" name="secondChoice" value="sadness" required />
+        <legend>How else can you describe it (optional)</legend>
+        <label><input type="radio" name="secondChoice" value="sadness" />
           sadness</label>
-        <label><input type="radio" name="secondChoice" value="joy" /> Joy</label>
-        <label><input type="radio" name="secondChoice" value="fear" /> Fear</label>
+        <label><input type="radio" name="secondChoice" value="joy" /> joy</label>
+        <label><input type="radio" name="secondChoice" value="fear" /> fear</label>
         <label><input type="radio" name="secondChoice" value="content" />
-          Content</label>
+          content</label>
       </fieldset>
 
-      <input type="submit" />
+      <div>
+        <label>Add submission caption:</label>
+        <input type="text" name="caption" placeholder="optional" class="textbox" >
+      </div>
+
+      <input type="submit" id="formSubmit"/>
     </form>
 </section>
 

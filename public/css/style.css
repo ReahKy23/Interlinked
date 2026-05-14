@@ -1,39 +1,147 @@
-html{
-    margin:0;
+html {
+    margin: 0;
     overflow: hidden;
 }
-body{
+
+body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
 }
+
+#formHeader {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 40px;
+    color: white;
+    /* font-family: "Tomorrow", sans-serif; */
+}
+
+form {
+    /* font-family: 'Orbitron', sans-serif; */
+    font-family: "Tomorrow", sans-serif;
+    color: white;
+    display: flex;
+    align-items: center;
+    width: 700px;
+    font-size: 30px;
+}
+
+#formSubmit {
+    font-family: "Tomorrow", sans-serif;
+    color: white;
+    width: fit-content;
+    height: 50px;
+    width: 100px;
+    background-color: black;
+    font-size: 20px;
+    border-radius: 10px;
+}
+#formSubmit:hover{
+    background-color: blue;
+    cursor: pointer;
+}
+
+.formSection {
+    display: flex;
+    flex-direction: column;
+}
+
 /* form styling */
-#formModal{
+#formModal {
     display: flex;
     flex-direction: column;
     align-self: center;
     align-items: center;
-    background-color: red;
-    width: 750px;
-    height: 500px;
+    background-color: #002400;
+    background-image: url(../assets/noisetexture.jpg);
+    background-blend-mode: multiply;
+    width: 800px;
+    height: 600px;
 }
 
-fieldset{
-    border:none;
-    text-align: center;
+#formModal{
+    border: solid 50px ;
+    border-bottom: solid 80px;
+    border-style: ridge;
+    border-color: #c9b99a;
+    border-radius: 40px;
 }
 
-/* navbar */
-.nav{
+form {
     display: flex;
-    justify-content: space-between;
-    width: 98vw;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 20px;
+}
+
+fieldset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    margin: 0;
+    padding: 0;
+    gap: 15px;
+}
+fieldset > label{
+    display: flex;
+    align-items: center;
     
 }
 
+/* file upload button */
+/* Hide the native input without removing it from the DOM */
+#file-upload {
+    display: none;
+}
+
+/* Style your label to look like a button */
+.custom-file-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.custom-file-button:hover {
+    background-color: white;
+    color: black;
+}
+
+.textbox {
+    border: solid;
+    height: 40px;
+    width: 300px;
+    background-color: green;
+}
+
+
+input[type="text"] {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    color: #00ffff;
+    background-color: #000;
+    border: 1px solid #00ffff;
+    padding: 8px;
+  }
+
+
+  /* form radi input styles */
+  
+
+/* navbar */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    width: 98vw;
+
+}
+
 /* nav buttons styles */
-.navbutton{
+.navbutton {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,19 +152,19 @@ fieldset{
     background-color: black;
 }
 
-.navbutton:hover{
+.navbutton:hover {
     background-color: #805DFF;
     border: solid 1px white;
     cursor: pointer;
 }
 
-.navbutton > a{
+.navbutton>a {
     text-decoration: none;
     color: white;
+    font-family: "Tomorrow", sans-serif;
 }
 
 /* home button design */
-#homebutton{
+#homebutton {
     border: solid 1px white;
 }
-
