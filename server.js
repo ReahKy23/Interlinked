@@ -24,7 +24,7 @@ app.use(cookieParser());
 // routes
 app.get("/", (req, res) => {
   //if there's a cookie, don't make another one, if there isn't, make one
-  if(req.cookies.visits){
+  if (req.cookies.visits) {
     let visits = req.cookies.visits;
     console.log(req.cookies.visits)
     res.cookie("visits", visits, {
@@ -33,16 +33,16 @@ app.get("/", (req, res) => {
     })
     //res.redirect("/map")
   } else {
-        //3 params:
-        //1. name of cookie stored
-        //2. init val you want to assign
-        //3rd: when the cookie expires, in obj format
-        let oneHrInMs = 1000 * 600 * 60
-        res.cookie("visits", 1, {
-            expires: new Date(Date.now() + oneHrInMs)
-        })
-    }
-    res.render("index.njk")
+    //3 params:
+    //1. name of cookie stored
+    //2. init val you want to assign
+    //3rd: when the cookie expires, in obj format
+    let oneHrInMs = 1000 * 600 * 60
+    res.cookie("visits", 1, {
+      expires: new Date(Date.now() + oneHrInMs)
+    })
+  }
+  res.render("index.njk")
 })
 
 app.get("/form", (req, res) => {
@@ -51,30 +51,45 @@ app.get("/form", (req, res) => {
 
 app.post("/sign", upload.single("image"), (req, res) => {
 
-  let newData = {
-    filePath: "uploads/" + req.file.filename,
-    name: req.body.userName,
-    imgDesc: req.body.description,
-    categories: [req.body.firstChoice, req.body.secondChoice]
-  }
+  database.count({ categories: 'sadness' }, function (err, sadnessCount) {
+    database.count({ categories: 'joy' }, function (err, joyCount) {
+      database.count({ categories: 'fear' }, function (err, fearCount) {
+        database.count({ categories: 'content' }, function (err, contentCount) {
 
-  database.count({categories: [''] }, (err, count){
+          let newData = {
+            filePath: "uploads/" + req.file.filename,
+            name: req.body.userName,
+            imgDesc: req.body.description,
+            categories: [req.body.firstChoice, req.body.secondChoice],
+            sadnessCount: sadnessCount,
+            joyCount: joyCount,
+            fearCount: fearCount,
+            contentCount: contentCount
+          }
+          console.log(newData)
+          database.insert(newData, function (err, newDoc) {
+            if (err) {
+              console.error(err)
+            } else {
+              res.redirect("/map")
+            }
+          })
+
+        })
+      })
+    })
   })
-  console.log(newData)
-  database.insert(newData)
-  res.redirect("/map")
 
 })
-
 app.get("/map", (req, res) => {
   res.render("map.njk")
 
 })
 
-app.get("/data", (req,res) => {
+app.get("/data", (req, res) => {
   let query = {}
   database.find(query, (err, foundData) => {
-    res.json({newData: foundData})
+    res.json({ newData: foundData })
   })
 })
 

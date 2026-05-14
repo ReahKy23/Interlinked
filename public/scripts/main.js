@@ -6,8 +6,8 @@ let myEdges = []
 for(let individualSubmission of jsonResponse){
     myNodes.push({id: individualSubmission._id})
 
-    
-    myEdges.push({from:  , to: })
+
+    myEdges.push({from: individualSubmission.sadnessCount, to: individualSubmission.joyCount})
 }
 let data = {
     nodes: [myNodes],
