@@ -49,43 +49,67 @@ app.get("/form", (req, res) => {
   res.render("form.njk")
 })
 
+//route that handles form submission, which allows users to upload and image. after submitting, appends data to database
 app.post("/sign", upload.single("image"), (req, res) => {
 
-  database.count({ categories: 'sadness' }, function (err, sadnessCount) {
-    database.count({ categories: 'joy' }, function (err, joyCount) {
-      database.count({ categories: 'fear' }, function (err, fearCount) {
-        database.count({ categories: 'content' }, function (err, contentCount) {
+  //set up initial data to be inserted into database
+  let newData = {
+    filePath: "uploads/" + req.file.filename,
+    name: req.body.userName,
+    imgDesc: req.body.caption,
+    categories: [req.body.firstChoice, req.body.secondChoice]
+  }
 
-          let newData = {
-            filePath: "uploads/" + req.file.filename,
-            name: req.body.userName,
-            imgDesc: req.body.caption,
-            categories: [req.body.firstChoice, req.body.secondChoice],
-            sadnessCount: sadnessCount,
-            joyCount: joyCount,
-            fearCount: fearCount,
-            contentCount: contentCount
+  console.log(newData)
+
+  //inserts newData into database
+  database.insert(newData, function (err, newDoc) {
+    if (err) {
+      console.error(err)
+    } else {
+      //count how many occurences of each category in the database
+      database.count({ categories: 'sadness' }, (err, sadnessCount) => {
+        if (err) {
+          console.error(err)
+        }
+        database.count({ categories: 'joy' }, (err, joyCount) => {
+          if (err) {
+            console.error(err)
           }
-          console.log(newData)
-          database.insert(newData, function (err, newDoc) {
+          database.count({ categories: 'fear' }, (err, fearCount) => {
             if (err) {
               console.error(err)
-            } else {
-              res.redirect("/map")
             }
-          })
+            database.count({ categories: 'content' }, (err, contentCount) => {
+              if (err) {
+                console.error(err)
+              }
+            }) //nested counts to ensure that before adding the counts to the database, we have the most updated counts of each category
 
+            // newDoc is the newly inserted document, including its _id 
+            database.update({ 
+              //find id of the newly inserted data
+              _id: newDoc._id },
+              //adds the counts of each category to the document
+               { $set: { sadnessCount, joyCount, fearCount, contentCount } }, {}, (err, numReplaced) => {
+              if (err) {
+                console.error(err)
+              }
+              res.redirect("/map")
+            })
+          })
         })
       })
-    })
-  })
-
+    }})
 })
+
+//route that renders the map page
 app.get("/map", (req, res) => {
   res.render("map.njk")
 
 })
 
+//sends data to the front end via a json format
 app.get("/data", (req, res) => {
   let query = {}
   database.find(query, (err, foundData) => {
