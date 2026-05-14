@@ -59,7 +59,7 @@ app.post("/sign", upload.single("image"), (req, res) => {
           let newData = {
             filePath: "uploads/" + req.file.filename,
             name: req.body.userName,
-            imgDesc: req.body.description,
+            imgDesc: req.body.caption,
             categories: [req.body.firstChoice, req.body.secondChoice],
             sadnessCount: sadnessCount,
             joyCount: joyCount,
