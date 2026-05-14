@@ -1,6 +1,6 @@
 {% extends "baseLayout.njk" %}
 {% block styles %}
-<link rel="stylesheet" href="../css/space.css" />
+<link rel="stylesheet" href="/kioskboard/kioskboard-2.3.0.min.css" />
 {% endblock %}
 
 {% block content %}
@@ -16,50 +16,63 @@
 
 <section id="formModal">
   <h1 id="formHeader">Upload your meeting below:</h1>
-    <form action="/sign" method="POST" enctype="multipart/form-data">
-      <div>
-        <label>What is your name?</label>
-        <input type="text" name="userName" required class="textbox" placeholder="enter name" />
-      </div>
+  <form action="/sign" method="POST" enctype="multipart/form-data">
+    <div>
+      <label>What is your name?</label>
+      <input type="text" name="userName" required class="textbox" placeholder="enter name" data-kioskboard-type="keyboard"
+        data-kioskboard-placement="below" data-kioskboard-specialcharacters="false" />
+    </div>
 
-  
-      <div>
-        <label for="file-upload" class="custom-file-button">
-          Upload your image
-        </label>
 
-        <!-- The actual hidden input -->
-        <input name="image" id="file-upload" type="file" required/>
-      </div>
+    <div>
+      <label for="file-upload" class="custom-file-button">
+        Upload your image
+      </label>
 
-      {# add requirement #}
-      <fieldset>
-        <legend>What best explains your image</legend>
-        <label><input type="radio" name="firstChoice" value="sadness" required />
-          sadness</label>
-        <label><input type="radio" name="firstChoice" value="joy" /> joy</label>
-        <label><input type="radio" name="firstChoice" value="fear" /> fear</label>
-        <label><input type="radio" name="firstChoice" value="content" />
-          content</label>
-      </fieldset>
+      <!-- The actual hidden input -->
+      <input name="image" id="file-upload" type="file" required />
+    </div>
 
-      <fieldset>
-        <legend>How else can you describe it (optional)</legend>
-        <label><input type="radio" name="secondChoice" value="sadness" />
-          sadness</label>
-        <label><input type="radio" name="secondChoice" value="joy" /> joy</label>
-        <label><input type="radio" name="secondChoice" value="fear" /> fear</label>
-        <label><input type="radio" name="secondChoice" value="content" />
-          content</label>
-      </fieldset>
+    {# add requirement #}
+    <fieldset>
+      <legend>What best explains your image</legend>
+      <label><input type="radio" name="firstChoice" value="sadness" required />
+        sadness</label>
+      <label><input type="radio" name="firstChoice" value="joy" /> joy</label>
+      <label><input type="radio" name="firstChoice" value="fear" /> fear</label>
+      <label><input type="radio" name="firstChoice" value="content" />
+        content</label>
+    </fieldset>
 
-      <div>
-        <label>Add submission caption:</label>
-        <input type="text" name="caption" placeholder="optional" class="textbox" >
-      </div>
+    <fieldset>
+      <legend>How else can you describe it (optional)</legend>
+      <label><input type="radio" name="secondChoice" value="sadness" />
+        sadness</label>
+      <label><input type="radio" name="secondChoice" value="joy" /> joy</label>
+      <label><input type="radio" name="secondChoice" value="fear" /> fear</label>
+      <label><input type="radio" name="secondChoice" value="content" />
+        content</label>
+    </fieldset>
 
-      <input type="submit" id="formSubmit"/>
-    </form>
+    <div>
+      <label>Add submission caption:</label>
+      <input type="text" name="caption" placeholder="optional" class="textbox" data-kioskboard-type="keyboard"
+        data-kioskboard-placement="below" data-kioskboard-specialcharacters="false">
+    </div>
+
+    <input type="submit" id="formSubmit" />
+  </form>
 </section>
+{% endblock %}
 
+{% block scripts %}
+<script src="/kioskboard/kioskboard-2.3.0.min.js"></script>
+<script>
+  KioskBoard.init({
+    keysJsonUrl: '/kioskboard/kioskboard-keys-english.json',
+    language: 'en',
+    theme: 'oldschool',
+  });
+  KioskBoard.run('input[type="text"]');
+</script>
 {% endblock %}
