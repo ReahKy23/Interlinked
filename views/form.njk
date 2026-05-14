@@ -1,16 +1,16 @@
-{% extends "baseLayout.njk" %} 
+{% extends "baseLayout.njk" %}
 {% block content %}
 
 <div class="nav">
-  <div  class="navbutton" id="homebutton" >
-      <a href="/">Home</a>
+  <div class="navbutton" id="homebutton">
+    <a href="/">Home</a>
   </div>
   <div class="navbutton">
-      <a href="/map">View Map</a>
+    <a href="/map">View Map</a>
   </div>
 </div>
 
-<body>
+<section id="formModal">
   <h1>Upload your meeting below:</h1>
   <div id="uploadForm">
     <form action="/sign" method="POST" enctype="multipart/form-data">
@@ -42,7 +42,6 @@
 
       <input type="submit" />
     </form>
-  </div>
-</body>
+</section>
 
 {% endblock %}
