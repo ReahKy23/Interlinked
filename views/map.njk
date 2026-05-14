@@ -1,8 +1,21 @@
 {% extends "baseLayout.njk" %}
+{% extends "spaceLayout.njk" %}
+
+{% block styles %}
+<div class="nav">
+    <div  class="navbutton" id="homebutton" >
+        <a href="/">Home</a>
+    </div>
+    <div class="navbutton">
+        <a href="/form">Upload Image</a>
+    </div>
+</div>
+<link rel="stylesheet" href="../css/space.css" />
+{% endblock %}
 
 {% block content %}
-<div class = "map-container">
+<div class="map-container">
 </div>
-User is now on the map page
-<a href="/form">Upload Image</a>
+
+
 {% endblock %}
