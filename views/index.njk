@@ -1,12 +1,16 @@
 {% extends "baseLayout.njk" %}
+{% extends "spaceLayout.njk" %}
+
+{# {% block styles %}
+<link rel="stylesheet" href="../css/space.css" />
+{% endblock %} #}
 
 {% block content %}
-<div>
 
-    <h1 class="welcome"> Interlinked </h1>
-    
-    <button class= "form-button"><a href="/form">Contribute</a></button>
+<h1 class="welcome"> Interlinked </h1>
 
-    <button class= "map-button"><a href="/map">Explore</a></button>
-</div>
+<button class="form-button"><a href="/form">Contribute</a></button>
+
+<button class="map-button"><a href="/map">Explore</a></button>
+
 {% endblock %}
