@@ -1,12 +1,18 @@
 html {
+    /* the form page is doing with weird white falsh on load */
     margin: 0;
     overflow: hidden;
+    background-color: black;
+
 }
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.welcome{
+    color: white;
 }
 
 #formHeader {
