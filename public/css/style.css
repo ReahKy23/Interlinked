@@ -3,6 +3,10 @@ html {
     margin: 0;
     overflow: hidden;
     background-color: black;
+    /* change to the image Gabby will make */
+    background-image: url(../assets/space_bright.jpg);
+    background-position: center;
+    background-size: cover;
 
 }
 
@@ -174,5 +178,4 @@ input[type="text"] {
 #homebutton {
     border: solid 1px white;
 }
-
 
