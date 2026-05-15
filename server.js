@@ -85,9 +85,7 @@ app.post("/sign", upload.single("image"), (req, res) => {
               if (err) {
                 console.error(err)
               }
-            }) //nested counts to ensure that before adding the counts to the database, we have the most updated counts of each category
-
-            // newDoc is the newly inserted document, including its _id 
+              // newDoc is the newly inserted document, including its _id 
             database.update({ 
               //find id of the newly inserted data
               _id: newDoc._id },
@@ -98,6 +96,7 @@ app.post("/sign", upload.single("image"), (req, res) => {
               }
               res.redirect("/map")
             })
+            }) //nested counts to ensure that before adding the counts to the database, we have the most updated counts of each category
           })
         })
       })
@@ -114,6 +113,7 @@ app.get("/map", (req, res) => {
 app.get("/data", (req, res) => {
   let query = {}
   database.find(query, (err, foundData) => {
+    console.log(foundData)
     res.json({ newData: foundData })
   })
 })
