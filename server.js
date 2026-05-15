@@ -10,6 +10,7 @@ const upload = multer({
   dest: "public/uploads",
 });
 
+
 // nunjucks templating
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +43,7 @@ app.get("/", (req, res) => {
       expires: new Date(Date.now() + oneHrInMs)
     })
   }
-  res.render("index.njk")
+  res.render("index.njk");
 })
 
 app.get("/form", (req, res) => {
