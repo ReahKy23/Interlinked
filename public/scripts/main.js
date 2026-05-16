@@ -1,27 +1,40 @@
 //Link to documentation currently using: https://docs.anychart.com/Basic_Charts/Network_Graph
-let jsonResponse = await fetch("/data")
-let myNodes = []
-let myEdges = []
 
-for (let i = 0; i < jsonResponse.newData.length; i++) {
-    myNodes.push({
-        id: jsonResponse.newData[i]._id
-    })
+window.onload = async () => {
+    let jsonResponse = await fetch("/data")
+    let receivedData = await jsonResponse.json();
+    let myNodes = []
+    let myEdges = []
+    let nodeData = receivedData.newData
+    console.log(nodeData)
 
-    myEdges.push(
-    {from: jsonResponse.newData[i].newDoc._id.sadnessCount,
-    to: jsonResponse.newData[i].newDoc._id.joyCount
-    }, { from: jsonResponse.newData[i].newDoc._id.joyCount, to: jsonResponse.newData[i].newDoc._id.fearCount }, { from: jsonResponse.newData[i].newDoc._id.fearCount, to: jsonResponse.newData[i].newDoc._id.contentCount }, 
-    {from: jsonResponse.newData[i].newDoc._id.contentCount, to: jsonResponse.newData[i].newDoc._id.sadnessCount })
+
+    for (let i = 0; i < nodeData.length; i++) {
+        myNodes.push({
+            id: nodeData[i]._id
+        })
+
+        //check which one is currently submitted
+        for (let j = 0; j < nodeData.length; j++) {
+            if (nodeData[i]._id != nodeData[j]._id && nodeData[i].categories[0] == nodeData[j].categories[0]) {
+                if (nodeData[i].sadnessCount - 1 == nodeData[j].sadnessCount) {
+                    myEdges.push({ from: nodeData[j]._id, to: nodeData[i]._id })
+                    console.log('success')
+                }
+
+
+            }
+        }
+    }
+
+    let data = {
+        nodes: myNodes,
+        edges: myEdges
+    }
+
+    let chart = anychart.graph(data)
+
+    chart.container("map-container")
+
+    chart.draw()
 }
-
-let data = {
-    nodes: [myNodes],
-    edges: [myEdges]
-}
-
-let chart = anychart.graph(data)
-
-chart.container("map-container")
-
-chart.draw()
