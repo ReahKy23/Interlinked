@@ -2,7 +2,6 @@ html {
     /* the form page is doing with weird white falsh on load */
     margin: 0;
     overflow: hidden;
-    background-image: url("/assets/space_bright.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -14,10 +13,28 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    background-image: url("/assets/base-bg.png");
+    background-image: url("/assets/space_bright.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.bg {
+    position: fixed;
+    width: 1450px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Anchors the image so that it's not in the corner*/
+}
+
+.computer {
+    position: fixed;
+    top: 70%;
+    left: 50.5%;
+    transform: translate(-50%, -50%);
+    width: 358px;
+    height: auto;
 }
 
 .welcome {
@@ -29,16 +46,23 @@ body {
     position: fixed;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
 .form-button {
     position: fixed;
     top: 30vh;
     left: 35vw;
-    border: solid 1px #805DFF;
+    border: solid 1px white;
     width: 200px;
     height: 50px;
     font-size: 20px;
     background-color: black;
-    font-family: "Tomorrow", sans-serif;
+    font-family: "Tektur", sans-serif;
+    border-radius: 15px;
+    text-decoration: none;
 }
 
 .form-button:hover {
@@ -51,12 +75,14 @@ body {
     position: fixed;
     top: 30vh;
     right: 35vw;
-    border: solid 1px #805DFF;
+    border: solid 1px white;
     width: 200px;
     height: 50px;
     font-size: 20px;
     background-color: black;
-    font-family: "Tomorrow", sans-serif;
+    font-family: "Tektur", sans-serif;
+    border-radius: 15px;
+    text-decoration: none;
 }
 
 .map-button:hover {
