@@ -34,7 +34,7 @@ body {
     left: 50%;
     width: 358px;
     height: auto;
-    transform: translate(-50%, -50%) translate(6px, 140px);
+    transform: translate(-50%, -50%) translate(6px, 155px);
     position: absolute;
 
 }
@@ -45,9 +45,25 @@ body {
     left: 50%;
     width: 358px;
     height: auto;
-    transform: translate(-50%, -50%) translate(6px, 140px);
+    transform: translate(-50%, -50%) translate(6px, 155px);
     position: absolute;
 
+}
+
+.computer-on{
+    opacity: 0;
+}
+
+.computer-off{
+    opacity: 1;
+}
+
+.computer-off:hover {
+    opacity: 0;
+}
+
+.computer-on:hover{
+    opacity: 1;
 }
 
 .welcome h1{
