@@ -28,7 +28,7 @@ body {
     transform: translate(-50%, -50%); /* Anchors the image so that it's not in the corner*/
 }
 
-.computer {
+.computer-off {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -36,8 +36,19 @@ body {
     height: auto;
     transform: translate(-50%, -50%) translate(6px, 140px);
     position: absolute;
+
 }
 
+.computer-on {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 358px;
+    height: auto;
+    transform: translate(-50%, -50%) translate(6px, 140px);
+    position: absolute;
+
+}
 
 .welcome h1{
     padding-top: 110px;
