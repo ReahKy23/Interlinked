@@ -2,22 +2,30 @@
 {% extends "spaceLayout.njk" %}
 
 {# {% block styles %}
-<link rel="stylesheet" href="../css/space.css" />
+<link rel="stylesheet" href="/css/space.css" />
 {% endblock %} #}
 
 {% block content %}
 
-
-<h1 class="welcome"> I N T E R L I N K E D </h1>
+{# Div for animation if added
+<div class="logo-container"> #}
+<div class="welcome">
+<h1> I N T E R L I N K E D </h1>
+</div>
+{# </div> #}
 
 {# Using img tag instead of background-url in CSS to keep the image fixed #}
 
 <img class="bg" src="/assets/base-bg.png">
 
-<button class="form-button"><a href="/form">C O N T R I B U T E</a></button>
+  <div class="buttons">
 
-<button class="map-button"><a href="/map">E X P L O R E</a></button>
+     <button class="form-button"><a href="/form">C O N T R I B U T E</a></button>
 
+     <button class="map-button"><a href="/map">E X P L O R E</a></button>
+
+  </div>
+  
 <img class="computer" src="/assets/Computer.png"/>
 
 

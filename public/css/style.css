@@ -29,21 +29,28 @@ body {
 }
 
 .computer {
-    position: fixed;
-    top: 70%;
-    left: 50.5%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 358px;
     height: auto;
+    transform: translate(-50%, -50%) translate(6px, 140px);
+    position: absolute;
 }
 
-.welcome {
-    padding-top: 100px;
+
+.welcome h1{
+    padding-top: 110px;
     color: white;
     font-family: "Tektur", sans-serif;
+    font-size: 50px;
     font-optical-sizing: auto;
     font-style: normal;
-    position: fixed;
+    transform: translate(-50%, -50%) translate(10px, -275px);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+
 }
 
 a {
@@ -51,10 +58,17 @@ a {
     color: white;
 }
 
+.buttons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translate(0px, -70px);
+  display: flex;
+  gap: 100px;
+  z-index: 999;
+}
+
 .form-button {
-    position: fixed;
-    top: 30vh;
-    left: 35vw;
     border: solid 1px white;
     width: 200px;
     height: 50px;
@@ -72,9 +86,6 @@ a {
 }
 
 .map-button {
-    position: fixed;
-    top: 30vh;
-    right: 35vw;
     border: solid 1px white;
     width: 200px;
     height: 50px;
@@ -257,4 +268,7 @@ input[type="text"] {
     height: 100vh;
 }
 
+
+
+/* H1 animation from alvarotrigo.com */
 
