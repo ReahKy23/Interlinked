@@ -16,33 +16,18 @@ window.onload = async () => {
             id: nodeData[i]._id
         })
 
-        //another for loop that iterates over the data
-        for (let j = 0; j < nodeData.length; j++) {
+        //another for loop that iterates over the data, j+1 to prevent duplicates
+        for (let j = i+1; j < nodeData.length; j++) {
             //if the id of the current node[i] is not equal to the id of current node[j], AND the categories for both nodes are the same, 
-            if (nodeData[i]._id != nodeData[j]._id && nodeData[i]._id < nodeData[j]._id && nodeData[i].categories[0] == nodeData[j].categories[0]) {
-                //execute the following if statement for each category 
 
-                //if the count of sadness for node[i] is 1 less than the count of sadness for node[j], then push an edge from node[j] to node[i]. this means that since they both share the same category and are not the same node, they can share a connection, hence allowing it to be pushed into the edges array.
-                if (nodeData[i].sadnessCount - 1 == nodeData[j].sadnessCount) {
-                    myEdges.push({ from: nodeData[j]._id, to: nodeData[i]._id })
-                    console.log('success')
-                }
 
-                //same logic applies for the rest of the categories
-                else if (nodeData[i].joyCount - 1 == nodeData[j].joyCount) {
-                    myEdges.push({ from: nodeData[j]._id, to: nodeData[i]._id })
-                    console.log('success')
-                }
+            //some() method checks if there is at least one category in nodeData[i] that is also in nodeData[j]
+            let sameCategory = nodeData[i].categories.some(cat => nodeData[j].categories.includes(cat))
 
-                else if (nodeData[i].fearCount - 1 == nodeData[j].fearCount) {
-                    myEdges.push({ from: nodeData[j]._id, to: nodeData[i]._id })
-                    console.log('success')
-                }
-
-                else if (nodeData[i].contentCount - 1 == nodeData[j].contentCount) {
-                    myEdges.push({ from: nodeData[j]._id, to: nodeData[i]._id })
-                    console.log('success')
-                }
+            //creates an edge between two nodes if they share a category
+            if(sameCategory){
+                myEdges.push({from: nodeData[i]._id, to: nodeData[j]._id})
+                console.log('success')
             }
         }
     }
