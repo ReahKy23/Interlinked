@@ -86,27 +86,38 @@ app.post("/sign", upload.single("image"), (req, res) => {
                 console.error(err)
               }
               // newDoc is the newly inserted document, including its _id 
-            database.update({ 
-              //find id of the newly inserted data
-              _id: newDoc._id },
-              //adds the counts of each category to the document
-               { $set: { sadnessCount, joyCount, fearCount, contentCount } }, {}, (err, numReplaced) => {
-              if (err) {
-                console.error(err)
-              }
-              res.redirect("/map")
-            })
+              database.update({
+                //find id of the newly inserted data
+                _id: newDoc._id
+              },
+                //adds the counts of each category to the document
+                { $set: { sadnessCount, joyCount, fearCount, contentCount } }, {}, (err, numReplaced) => {
+                  if (err) {
+                    console.error(err)
+                  }
+                  res.redirect("/map")
+                })
             }) //nested counts to ensure that before adding the counts to the database, we have the most updated counts of each category
           })
         })
       })
-    }})
+    }
+  })
+})
+
+//route that finds one document based on id
+app.get("/data/:id", (req, res) => {
+  let query = {
+    _id: request.params.id
+  }
+  database.findOne(query, (err, foundData) => {
+    res.json(foundData)
+  })
 })
 
 //route that renders the map page
 app.get("/map", (req, res) => {
   res.render("map.njk")
-
 })
 
 //sends data to the front end via a json format

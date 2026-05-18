@@ -11,13 +11,31 @@ window.onload = async () => {
 
     //for loop that iterates through the entire length of the data
     for (let i = 0; i < nodeData.length; i++) {
+
+        let color;
+        let stroke;
+        if (nodeData[i].categories[0] == 'sadness') {
+            color = 'lightblue'
+            strokeCol = 'darkblue'
+        } else if (nodeData[i].categories[0] == 'joy') {
+            color = 'yellow'
+            strokeCol = 'white'
+        } else if (nodeData[i].categories[0] == 'fear') {
+            color = 'purple'
+            strokeCol = '#CD9CFF'
+        } else if (nodeData[i].categories[0] == 'content') {
+            color = 'green'
+            strokeCol = 'lightgreen'
+        }
+
         //pushes each individual id into the nodes array
         myNodes.push({
-            id: nodeData[i]._id
+            id: nodeData[i]._id,
+            normal: { fill: color, stroke: strokeCol}
         })
 
         //another for loop that iterates over the data, j+1 to prevent duplicates
-        for (let j = i+1; j < nodeData.length; j++) {
+        for (let j = i + 1; j < nodeData.length; j++) {
             //if the id of the current node[i] is not equal to the id of current node[j], AND the categories for both nodes are the same, 
 
 
@@ -25,8 +43,8 @@ window.onload = async () => {
             let sameCategory = nodeData[i].categories.some(cat => nodeData[j].categories.includes(cat))
 
             //creates an edge between two nodes if they share a category
-            if(sameCategory){
-                myEdges.push({from: nodeData[i]._id, to: nodeData[j]._id})
+            if (sameCategory) {
+                myEdges.push({ from: nodeData[i]._id, to: nodeData[j]._id })
                 console.log('success')
             }
         }
@@ -42,12 +60,18 @@ window.onload = async () => {
 
     let chart = anychart.graph(data)
     let nodes = chart.nodes()
+    let edges = chart.edges()
 
 
-    nodes.normal().height(20)
+    //CHART STYLING
+    nodes.normal().height(30)
     nodes.normal().shape("star5")
-    nodes.normal().fill("lightblue")
-    nodes.normal().stroke("white", 2)
+    nodes.hovered().height(50)
+    nodes.selected().fill('white')
+    edges.hovered().stroke('yellow')
+    edges.selected().stroke('white')
+    chart.tooltip().enabled(false)
+    
     chart.bounds(0, 0, '100%', '100%')
     chart.background().fill("none")
     // chart.background().stroke("none")3
@@ -55,4 +79,20 @@ window.onload = async () => {
     chart.container("map-container")
 
     chart.draw()
+
+    chart.listen("click", (clickedEvent)=>{
+        if(clickedEvent.domTarget && clickedEvent.domTarget.tag){
+            let nodeId = clickedEvent.domTarget.tag.id
+
+            let response = await fetch(`/data/${nodeId}`)
+            let nodeData = await response.json()
+
+            if(nodeData){
+                document.getElementById("popup").innerHTML =
+                `<img src="${nodeData.filePath}" style="width: 100px; height: 100px;">
+                <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>
+                <p>${nodeData.imgDesc}</p>`
+            }
+        }       
+    })
 }
