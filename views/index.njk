@@ -16,7 +16,7 @@
 
 {# Using img tag instead of background-url in CSS to keep the image fixed #}
 
-<img class="bg" src="/assets/base-bg.png">
+  <img class="bg" src="/assets/base-bg.png">
 
   <div class="buttons">
 
@@ -26,12 +26,20 @@
 
   </div>
 
+<div class="comp-popup" onclick="openPopup()">
 <img class="computer-off" src="/assets/Computer.png"/>
 <img class="computer-on" src="/assets/Computer.gif"/>
+</div>
 
+<div id="popup" class="popup hidden">
+   <div class="popup-text">
+     <span class="close" onclick="closePopup()">x</span>
+       <p> Lorem ipsum </p>
+    </div>
+</div>
 
+{% endblock %}
 
-
-
-
+{% block scripts %}
+<script src="/scripts/popup.js"></script>
 {% endblock %}
