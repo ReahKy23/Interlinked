@@ -108,7 +108,7 @@ app.post("/sign", upload.single("image"), (req, res) => {
 //route that finds one document based on id
 app.get("/data/:id", (req, res) => {
   let query = {
-    _id: request.params.id
+    _id: req.params.id
   }
   database.findOne(query, (err, foundData) => {
     res.json(foundData)

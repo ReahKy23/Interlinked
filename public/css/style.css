@@ -326,3 +326,15 @@ input[type="text"] {
   float: right;
   font-size: 20px;
 }
+
+/* popup styling */
+#popup{
+    display: none;
+    position: fixed;
+    background: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    z-index: 1000;
+    text-align: center;
+}

@@ -79,8 +79,8 @@ window.onload = async () => {
     edges.hovered().stroke('yellow')
     edges.selected().stroke('white')
 
+    chart.interactivity().hoverGap(0)
     chart.tooltip().enabled(false)
-
     chart.bounds(0, 0, '100%', '100%')
     chart.background().fill("none")
     // chart.background().stroke("none")3
@@ -94,15 +94,23 @@ window.onload = async () => {
 
             let nodeId = clickedEvent.domTarget.tag.id
 
-            let response = await fetch(/data/${nodeId})
+            let x = clickedEvent.originalEvent.clientX;
+            let y = clickedEvent.originalEvent.clientY;
+
+            let response = await fetch(`/data/${nodeId}`)
             let nodeData = await response.json()
 
             if (nodeData) {
-
-                document.getElementById("popup").innerHTML =
+                document.getElementById("popup-content").innerHTML =
                     `<img src="${nodeData.filePath}" style="width: 100px; height: 100px;">
                      <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>
                      <p>${nodeData.imgDesc}</p>`
+
+                let popup = document.getElementById("popup");
+                popup.style.left = x + "px";
+                popup.style.top = (y - popup.offsetHeight - 20) + "px";
+                openPopup();
+
             }
         }
     })
@@ -112,13 +120,13 @@ window.onload = async () => {
 
 // Async function to make sure AnyChart doesn't try to run on njk files that don't contain it
 // Without this, other javascript files can not load on individual paged
-window.onload = async () => {
+// window.onload = async () => {
 
-    const container = document.getElementById("chartContainer");
+//     const container = document.getElementById("chartContainer");
 
-    if (!container) return; //Only runs the code above on pages that contain "chartContainer"
+//     if (!container) return; //Only runs the code above on pages that contain "chartContainer"
 
-    var chart = anychart.line();
-    chart.container("chartContainer");
-    chart.draw();
-};
+//     var chart = anychart.line();
+//     chart.container("chartContainer");
+//     chart.draw();
+// };
