@@ -26,8 +26,17 @@
 
   </div>
 
+<div class="comp-popup" onclick="openPopup()">
 <img class="computer-off" src="/assets/Computer.png"/>
 <img class="computer-on" src="/assets/Computer.gif"/>
+</div>
+
+<div id="popup" class="popup hidden">
+  <div class="popup-text">
+    <span class="close" onclick="closePopup()">×</span>
+    <p>Lorem ipsum</p>
+  </div>
+</div>
 
 {% endblock %}
 
