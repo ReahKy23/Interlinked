@@ -96,3 +96,16 @@ window.onload = async () => {
         }       
     })
 }
+
+// Async function to make sure AnyChart doesn't try to run on njk files that don't contain it
+// Without this, other javascript files can not load on individual paged
+window.onload = async () => {
+
+  const container = document.getElementById("chartContainer");
+
+  if (!container) return; //Only runs the code above on pages that contain "chartContainer" 
+
+  var chart = anychart.line();
+  chart.container("chartContainer");
+  chart.draw();
+};
