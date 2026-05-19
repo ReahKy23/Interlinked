@@ -1,5 +1,3 @@
-
-
 function openPopup() {
   document.getElementById("popup").classList.remove("hidden");
 }
