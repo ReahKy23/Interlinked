@@ -80,7 +80,7 @@ window.onload = async () => {
 
     chart.draw()
 
-    chart.listen("click", (clickedEvent)=>{
+    chart.listen("click", async (clickedEvent)=>{
         if(clickedEvent.domTarget && clickedEvent.domTarget.tag){
             let nodeId = clickedEvent.domTarget.tag.id
 
