@@ -1,11 +1,5 @@
 //Link to documentation currently using: https://docs.anychart.com/Basic_Charts/Network_Graph
 
-let chart;
-
-function closePopupContainer() {
-    document.getElementById("popup-container").style.display = "none"
-}
-
 window.onload = async () => {
 
     let jsonResponse = await fetch("/data")
@@ -72,7 +66,7 @@ window.onload = async () => {
         edges: myEdges
     }
 
-    chart = anychart.graph(data)
+    let chart = anychart.graph(data)
     let nodes = chart.nodes()
     let edges = chart.edges()
 
@@ -80,10 +74,10 @@ window.onload = async () => {
     nodes.normal().height(30)
     nodes.normal().shape("star5")
     nodes.hovered().height(50)
-    nodes.hovered().fill('white')
     nodes.selected().fill('white')
 
-    edges.hovered().stroke('pink',5)
+    edges.hovered().stroke('yellow')
+    edges.selected().stroke('white')
 
     chart.interactivity().hoverGap(0)
     chart.tooltip().enabled(false)
@@ -94,11 +88,10 @@ window.onload = async () => {
     chart.container("map-container")
     chart.draw()
 
-    // document.getElementById('close-popup').addEventListener('click', closePopupContainer)
-
     chart.listen("click", async (clickedEvent) => {
 
         if (clickedEvent.domTarget && clickedEvent.domTarget.tag) {
+
             let nodeId = clickedEvent.domTarget.tag.id
 
             let x = clickedEvent.originalEvent.clientX;
@@ -113,30 +106,27 @@ window.onload = async () => {
                      <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>
                      <p>${nodeData.imgDesc}</p>`
 
-                let popup = document.getElementById("popup-container");
-                popup.style.display = "block";
-                popup.style.visibility = "hidden"
-
-                let popupWidth = popup.offsetWidth
-                let popupHeight = popup.offsetHeight
-
-                let left = x - popupWidth / 2
-                let top = y - popupHeight - 20
-
-                if (left < 0) {
-                    left = 10
-                }
-                if (left + popupWidth > window.innerWidth) left = window.innerWidth - popupWidth - 10
-                if (top < 0) top = y + 20
-
-                popup.style.left = left + "px"
-                popup.style.top = top + "px"
-                popup.style.visibility = "visible"
+                let popup = document.getElementById("popup");
+                popup.style.left = x + "px";
+                popup.style.top = (y - popup.offsetHeight - 20) + "px";
+                openPopup();
 
             }
         }
-        else {
-                closePopupContainer()
-            }
     })
+
 }
+
+
+// Async function to make sure AnyChart doesn't try to run on njk files that don't contain it
+// Without this, other javascript files can not load on individual paged
+window.onload = async () => {
+
+  const container = document.getElementById("chartContainer");
+
+  if (!container) return; //Only runs the code above on pages that contain "chartContainer" 
+
+  var chart = anychart.line();
+  chart.container("chartContainer");
+  chart.draw();
+};
