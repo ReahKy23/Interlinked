@@ -1,5 +1,11 @@
 //Link to documentation currently using: https://docs.anychart.com/Basic_Charts/Network_Graph
 
+let chart;
+
+function closePopupContainer() {
+    document.getElementById("popup-container").style.display = "none"
+}
+
 window.onload = async () => {
 
     let jsonResponse = await fetch("/data")
@@ -66,7 +72,7 @@ window.onload = async () => {
         edges: myEdges
     }
 
-    let chart = anychart.graph(data)
+    chart = anychart.graph(data)
     let nodes = chart.nodes()
     let edges = chart.edges()
 
@@ -74,10 +80,10 @@ window.onload = async () => {
     nodes.normal().height(30)
     nodes.normal().shape("star5")
     nodes.hovered().height(50)
+    nodes.hovered().fill('white')
     nodes.selected().fill('white')
 
-    edges.hovered().stroke('yellow')
-    edges.selected().stroke('white')
+    edges.hovered().stroke('pink',5)
 
     chart.interactivity().hoverGap(0)
     chart.tooltip().enabled(false)
@@ -88,10 +94,11 @@ window.onload = async () => {
     chart.container("map-container")
     chart.draw()
 
+    // document.getElementById('close-popup').addEventListener('click', closePopupContainer)
+
     chart.listen("click", async (clickedEvent) => {
 
         if (clickedEvent.domTarget && clickedEvent.domTarget.tag) {
-
             let nodeId = clickedEvent.domTarget.tag.id
 
             let x = clickedEvent.originalEvent.clientX;
@@ -107,12 +114,29 @@ window.onload = async () => {
                      <p>${nodeData.imgDesc}</p>`
 
                 let popup = document.getElementById("popup-container");
-                popup.style.left = x + "px";
-                popup.style.top = (y - popup.offsetHeight - 20) + "px";
-                
+                popup.style.display = "block";
+                popup.style.visibility = "hidden"
+
+                let popupWidth = popup.offsetWidth
+                let popupHeight = popup.offsetHeight
+
+                let left = x - popupWidth / 2
+                let top = y - popupHeight - 20
+
+                if (left < 0) {
+                    left = 10
+                }
+                if (left + popupWidth > window.innerWidth) left = window.innerWidth - popupWidth - 10
+                if (top < 0) top = y + 20
+
+                popup.style.left = left + "px"
+                popup.style.top = top + "px"
+                popup.style.visibility = "visible"
 
             }
         }
+        else {
+                closePopupContainer()
+            }
     })
-
 }
