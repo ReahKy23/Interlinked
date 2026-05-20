@@ -378,7 +378,7 @@ a.next{
     padding: 20px;
     padding-bottom: 35px;
     border: none;
-    border-radius: 90px;
+    border-radius: 30px;
     text-align: center;
     z-index: 999;
 }
@@ -386,7 +386,7 @@ a.next{
 #popup-container img{
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 60px;
 }
 
@@ -397,7 +397,7 @@ a.next{
 }
 
 #popup-content img.expanded {
-    height: auto;
+    max-width: fit-content;
     transform: scale(3);
     cursor: zoom-out;
     border-radius: 0px;
