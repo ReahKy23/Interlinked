@@ -6,6 +6,10 @@ function closePopup() {
   document.getElementById("popup").classList.add("hidden");
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> gabrielle
 //JS function pulled from previous project of Gabby's to emulate a typing animation
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("blurb");
