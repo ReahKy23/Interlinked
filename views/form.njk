@@ -64,15 +64,3 @@
   </form>
 </section>
 {% endblock %}
-
-{% block scripts %}
-<script src="/kioskboard/kioskboard-2.3.0.min.js"></script>
-<script>
-  KioskBoard.init({
-    keysJsonUrl: '/kioskboard/kioskboard-keys-english.json',
-    language: 'en',
-    theme: 'oldschool',
-  });
-  KioskBoard.run('input[type="text"]');
-</script>
-{% endblock %}

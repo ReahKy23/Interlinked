@@ -92,46 +92,46 @@ window.onload = async () => {
     chart.container("map-container")
     chart.draw()
 
-    chart.listen("click", async (clickedEvent) => {
+    // chart.listen("click", async (clickedEvent) => {
 
-        if (clickedEvent.domTarget && clickedEvent.domTarget.tag) {
+    //     if (clickedEvent.domTarget && clickedEvent.domTarget.tag) {
 
-            let nodeId = clickedEvent.domTarget.tag.id
+    //         let nodeId = clickedEvent.domTarget.tag.id
 
-            let x = clickedEvent.originalEvent.clientX;
-            let y = clickedEvent.originalEvent.clientY;
+    //         let x = clickedEvent.originalEvent.clientX;
+    //         let y = clickedEvent.originalEvent.clientY;
 
-            let response = await fetch(`/data/${nodeId}`)
-            let nodeData = await response.json()
+    //         let response = await fetch(`/data/${nodeId}`)
+    //         let nodeData = await response.json()
 
-            if (nodeData) {
-                document.getElementById("popup-content").innerHTML =
-                    `<img src="${nodeData.filePath}" style="width: 100px; height: 100px;">
-                     <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>
-                     <p>${nodeData.imgDesc}</p>`
+    //         if (nodeData) {
+    //             document.getElementById("popup-content").innerHTML =
+    //                 `<img src="${nodeData.filePath}" style="width: 100px; height: 100px;">
+    //                  <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>
+    //                  <p>${nodeData.imgDesc}</p>`
 
-                let popup = document.getElementById("popup-container")
-                popup.style.display = "block"
-                popup.style.visibility = "hidden"
+    //             let popup = document.getElementById("popup-container")
+    //             popup.style.display = "block"
+    //             popup.style.visibility = "hidden"
 
-                let popupWidth = popup.offsetWidth
-                let popupHeight = popup.offsetHeight
+    //             let popupWidth = popup.offsetWidth
+    //             let popupHeight = popup.offsetHeight
 
-                let left = x - popupWidth / 2
-                let top = y - popupHeight - 20
+    //             let left = x - popupWidth / 2
+    //             let top = y - popupHeight - 20
 
-                if (left < 0) left = 10
-                if (left + popupWidth > window.innerWidth) left = window.innerWidth - popupWidth - 10
-                if (top < 0) top = y + 20
+    //             if (left < 0) left = 10
+    //             if (left + popupWidth > window.innerWidth) left = window.innerWidth - popupWidth - 10
+    //             if (top < 0) top = y + 20
 
-                popup.style.left = left + "px"
-                popup.style.top = top + "px"
-                popup.style.visibility = "visible"
-            }
-        } else {
-            closePopupContainer()
-        }
-    })
+    //             popup.style.left = left + "px"
+    //             popup.style.top = top + "px"
+    //             popup.style.visibility = "visible"
+    //         }
+    //     } else {
+    //         closePopupContainer()
+    //     }
+    // })
 
     chart.listen("mouseOver", async (hoverEvent) => {
         if (hoverEvent.domTarget && hoverEvent.domTarget.tag) {
@@ -141,7 +141,7 @@ window.onload = async () => {
             let response = await fetch(`/data/${nodeId}`);
             let nodeData = await response.json();
     
-            if (nodeData && nodeData.imgDesc) {
+            if (nodeData) {
                 document.getElementById("popup-content").innerHTML =
                     `<img src="${nodeData.filePath}" style="width: 100px; height: 100px;">
                      <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>`;
