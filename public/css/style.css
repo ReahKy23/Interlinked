@@ -357,3 +357,11 @@ input[type="text"] {
 @keyframes blink{
   50% { opacity: 0; }
 }
+
+#popup-container {
+    display: none;
+    position: absolute;
+    background-color: rgba(106, 88, 194, 0.95);
+    border: 40px solid #252624;
+    
+}
