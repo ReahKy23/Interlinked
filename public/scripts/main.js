@@ -133,8 +133,68 @@ window.onload = async () => {
         }
     })
 
-}
+    chart.listen("mouseOver", async (hoverEvent) => {
+        if (hoverEvent.domTarget && hoverEvent.domTarget.tag) {
+            let nodeId = hoverEvent.domTarget.tag.id;
+            let x = hoverEvent.originalEvent.clientX;
+            let y = hoverEvent.originalEvent.clientY;
+            let response = await fetch(`/data/${nodeId}`);
+            let nodeData = await response.json();
+    
+            if (nodeData && nodeData.imgDesc) {
+                document.getElementById("popup-content").innerHTML =
+                    `<img src="${nodeData.filePath}" style="width: 100px; height: 100px;">
+                     <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>
+                     <p>${nodeData.imgDesc}</p>`;
+    
+                let popup = document.getElementById("popup-container");
+                popup.style.display = "block";
+                popup.style.visibility = "hidden";
+    
+                let popupWidth = popup.offsetWidth;
+                let popupHeight = popup.offsetHeight;
+                let left = x - popupWidth / 2;
+                let top = y - popupHeight - 20;
+    
+                if (left < 0) left = 10;
+                if (left + popupWidth > window.innerWidth) left = window.innerWidth - popupWidth - 10;
+                if (top < 0) top = y + 20;
+    
+                popup.style.left = left + "px";
+                popup.style.top = top + "px";
+                popup.style.visibility = "visible";
+            }
+        } else {
+            closePopupContainer();
+        }
+    });
+    
+    chart.listen("mouseOver", async (hoverEvent) => {
+        if (hoverEvent.domTarget && hoverEvent.domTarget.tag) {
+            let nodeId = hoverEvent.domTarget.tag.id;
+            let caption = await fetch(`/data/${nodeId}`);
+            let nodeData = await caption.json();
+    
+            if (nodeData && nodeData.imgDesc) {
+                document.getElementById("mapOverlay").innerHTML = nodeData.imgDesc;
+                document.getElementById("mapOverlay").style.display = "flex";
+            }
+        } else {
+            document.getElementById("mapOverlay").style.display = "none";
+            document.getElementById("mapOverlay").innerHTML = "";
+        }
+    });
+    
+    chart.listen("mouseOut", (mouseOutEvent) => {
+        if (mouseOutEvent.domTarget && mouseOutEvent.domTarget.tag) {
+            document.getElementById("mapOverlay").style.display = "none";
+            document.getElementById("mapOverlay").innerHTML = "";
+        }
+    });
 
+    
+
+}
 
 // Async function to make sure AnyChart doesn't try to run on njk files that don't contain it
 // Without this, other javascript files can not load on individual paged
