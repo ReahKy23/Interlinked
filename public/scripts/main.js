@@ -1,5 +1,9 @@
 //Link to documentation currently using: https://docs.anychart.com/Basic_Charts/Network_Graph
 
+function closePopupContainer() {
+    document.getElementById("popup-container").style.display = "none";
+}
+
 window.onload = async () => {
 
     let jsonResponse = await fetch("/data")
@@ -106,12 +110,26 @@ window.onload = async () => {
                      <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>
                      <p>${nodeData.imgDesc}</p>`
 
-                let popup = document.getElementById("popup");
-                popup.style.left = x + "px";
-                popup.style.top = (y - popup.offsetHeight - 20) + "px";
-                openPopup();
+                let popup = document.getElementById("popup-container")
+                popup.style.display = "block"
+                popup.style.visibility = "hidden"
 
+                let popupWidth = popup.offsetWidth
+                let popupHeight = popup.offsetHeight
+
+                let left = x - popupWidth / 2
+                let top = y - popupHeight - 20
+
+                if (left < 0) left = 10
+                if (left + popupWidth > window.innerWidth) left = window.innerWidth - popupWidth - 10
+                if (top < 0) top = y + 20
+
+                popup.style.left = left + "px"
+                popup.style.top = top + "px"
+                popup.style.visibility = "visible"
             }
+        } else {
+            closePopupContainer()
         }
     })
 
@@ -120,13 +138,13 @@ window.onload = async () => {
 
 // Async function to make sure AnyChart doesn't try to run on njk files that don't contain it
 // Without this, other javascript files can not load on individual paged
-window.onload = async () => {
+// window.onload = async () => {
 
-  const container = document.getElementById("chartContainer");
+//     const container = document.getElementById("chartContainer");
 
-  if (!container) return; //Only runs the code above on pages that contain "chartContainer" 
+//     if (!container) return; //Only runs the code above on pages that contain "chartContainer" 
 
-  var chart = anychart.line();
-  chart.container("chartContainer");
-  chart.draw();
-};
+//     var chart = anychart.line();
+//     chart.container("chartContainer");
+//     chart.draw();
+// };
