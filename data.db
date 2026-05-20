@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-{"filePath":"uploads/3527ccaee373df52949351b37ecaf848","name":"Test","imgDesc":"Earth","categories":["joy","joy"],"_id":"DcbZemynzXArrZQg","sadnessCount":0,"joyCount":1,"fearCount":0,"contentCount":0}
-{"filePath":"uploads/079ef42fd669a0dc0c8427eaf512b5b8","name":"Test","imgDesc":"Earth","categories":["fear","fear"],"_id":"ckyPGgUJzoFW3QWw","sadnessCount":0,"joyCount":1,"fearCount":1,"contentCount":0}
-{"filePath":"uploads/89a7ce4894efb393040c47f6b6705b7f","name":"Test","imgDesc":"Earth","categories":["joy","joy"],"_id":"gmuR8h68u6r7jmsB"}
-{"filePath":"uploads/89a7ce4894efb393040c47f6b6705b7f","name":"Test","imgDesc":"Earth","categories":["joy","joy"],"_id":"gmuR8h68u6r7jmsB","sadnessCount":0,"joyCount":2,"fearCount":1,"contentCount":0}
-=======
->>>>>>> 897ba90f9c98c2a411bb48835a418fcfd6a97753
+{"filePath":"uploads/d9ae5b17bc7383359582cc29655efc8e","name":"Home 2","imgDesc":"Earth","categories":["joy","fear"],"_id":"1x0W79c7UuqQI7EW","sadnessCount":0,"joyCount":2,"fearCount":1,"contentCount":0}
+{"filePath":"uploads/6075b7b3a576029a162adb837d768ac8","name":"test","imgDesc":"Test","categories":["joy","joy"],"_id":"t8L5vdF4ha45lGzV","sadnessCount":0,"joyCount":1,"fearCount":0,"contentCount":0}
+{"filePath":"uploads/17c220cbaddb319e7eaff773c87619d3","name":"gab","imgDesc":"joy","categories":["content","sadness"],"_id":"y4Aq9B95uzHx9bCE"}
+{"filePath":"uploads/17c220cbaddb319e7eaff773c87619d3","name":"gab","imgDesc":"joy","categories":["content","sadness"],"_id":"y4Aq9B95uzHx9bCE","sadnessCount":1,"joyCount":2,"fearCount":1,"contentCount":1}

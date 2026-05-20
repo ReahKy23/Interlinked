@@ -106,9 +106,16 @@ window.onload = async () => {
 
             if (nodeData) {
                 document.getElementById("popup-content").innerHTML =
-                    `<img src="${nodeData.filePath}" style="width: 100px; height: 100px;">
-                     <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>
-                     <p>${nodeData.imgDesc}</p>`
+                    `<img src="${nodeData.filePath}" style="width: 150px; height: 150px">
+                     <p> Category 1: ${nodeData.categories[0]}</p>
+                     <p> Category 2: ${nodeData.categories[1]} </p>
+                     <p>Description: ${nodeData.imgDesc}</p>`
+                      
+                     //Event listener for expanding images on popup
+                        const img = document.querySelector("#popup-content img");
+                            img.addEventListener("click", () => {
+                            img.classList.toggle("expanded");
+                         });
 
                 let popup = document.getElementById("popup-container")
                 popup.style.display = "block"
