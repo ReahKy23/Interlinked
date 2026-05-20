@@ -396,3 +396,20 @@ a.next{
     color: rgb(255, 0, 0);
     z-index: 1000;
 }
+
+/* text overlay for the map page */
+#mapOverlay{
+    position: absolute;
+    z-index: 9999;
+    width: fit-content;
+    background-color: rgba(0, 0, 0, 0.754);
+    bottom: 10%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:  10px 20px;
+    font-size: 24px;
+    color: whitesmoke;
+    font-family: "Tektur", sans-serif;
+}
