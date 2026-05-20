@@ -144,8 +144,7 @@ window.onload = async () => {
             if (nodeData && nodeData.imgDesc) {
                 document.getElementById("popup-content").innerHTML =
                     `<img src="${nodeData.filePath}" style="width: 100px; height: 100px;">
-                     <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>
-                     <p>${nodeData.imgDesc}</p>`;
+                     <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>`;
     
                 let popup = document.getElementById("popup-container");
                 popup.style.display = "block";
