@@ -143,27 +143,6 @@ window.onload = async () => {
     
             if (nodeData) {
                 document.getElementById("popup-content").innerHTML =
-<<<<<<< HEAD
-                    `<img src="${nodeData.filePath}" style="width: 100px; height: 100px;">
-                     <p>${nodeData.categories[0]}, ${nodeData.categories[1]}</p>`;
-    
-                let popup = document.getElementById("popup-container");
-                popup.style.display = "block";
-                popup.style.visibility = "hidden";
-    
-                let popupWidth = popup.offsetWidth;
-                let popupHeight = popup.offsetHeight;
-                let left = x - popupWidth / 2;
-                let top = y - popupHeight - 20;
-    
-                if (left < 0) left = 10;
-                if (left + popupWidth > window.innerWidth) left = window.innerWidth - popupWidth - 10;
-                if (top < 0) top = y + 20;
-    
-                popup.style.left = left + "px";
-                popup.style.top = top + "px";
-                popup.style.visibility = "visible";
-=======
                     `<img src="${nodeData.filePath}" style="width: 150px; height: 150px">
                      <p> Category 1: ${nodeData.categories[0]}</p>
                      <p> Category 2: ${nodeData.categories[1]} </p>
@@ -192,7 +171,6 @@ window.onload = async () => {
                 popup.style.left = left + "px"
                 popup.style.top = top + "px"
                 popup.style.visibility = "visible"
->>>>>>> gabrielle
             }
         } else {
             closePopupContainer();
